@@ -1,0 +1,58 @@
+﻿@model DotNetCoreSpeechToTextDemo.Models.ShortSpeechResult
+
+<div>
+    @if (Model.Reason == Microsoft.CognitiveServices.Speech.ResultReason.RecognizedSpeech)
+    {
+        <div class="bs-callout bs-callout-info">
+            <h4>Speech Recognized! <span class="glyphicon glyphicon-ok"></span></h4>
+            <dl class="dl-horizontal" style="margin-top: 15px;">
+                <dt>Text Recognized</dt>
+                <dd><em>@Model.Text</em></dd>
+                <dt style="margin-top: 7px;">Duration</dt>
+                <dd style="margin-top: 7px;">@Model.Duration.TotalSeconds.ToString() sec</dd>
+                <dt>Duration (ticks)</dt>
+                <dd>@Model.Duration.Ticks.ToString()</dd>
+                <dt>Audio Offset</dt>
+                <dd>@Model.OffsetInTicks.ToString() ticks</dd>
+                <dt>Result Reason</dt>
+                <dd>@Model.Reason.ToString()</dd>
+            </dl>
+        </div>
+    }
+    else if (Model.Reason == Microsoft.CognitiveServices.Speech.ResultReason.NoMatch)
+    {
+        <div class="bs-callout bs-callout-danger">
+            <h4>No match. <span class="glyphicon glyphicon-remove"></span></h4>
+            <dl class="dl-horizontal" style="margin-top: 15px;">
+                <dt>Text Recognized</dt>
+                <dd><em>@Model.Text</em></dd>
+                <dt style="margin-top: 7px;">Duration</dt>
+                <dd style="margin-top: 7px;">@Model.Duration.TotalSeconds.ToString() sec</dd>
+                <dt>Duration (ticks)</dt>
+                <dd>@Model.Duration.Ticks.ToString()</dd>
+                <dt>Audio Offset</dt>
+                <dd>@Model.OffsetInTicks.ToString() ticks</dd>
+                <dt>Result Reason</dt>
+                <dd>@Model.Reason.ToString()</dd>
+            </dl>
+        </div>
+    }
+    else if (Model.Reason == Microsoft.CognitiveServices.Speech.ResultReason.Canceled)
+    {
+        <div class="bs-callout bs-callout-warning">
+            <h4>Canceled <span class="glyphicon glyphicon-exclamation-sign"></span></h4>
+            <dl class="dl-horizontal" style="margin-top: 15px;">
+                <dt>Text Recognized</dt>
+                <dd><em>@Model.Text</em></dd>
+                <dt style="margin-top: 7px;">Duration</dt>
+                <dd style="margin-top: 7px;">@Model.Duration.TotalSeconds.ToString() sec</dd>
+                <dt>Duration (ticks)</dt>
+                <dd>@Model.Duration.Ticks.ToString()</dd>
+                <dt>Audio Offset</dt>
+                <dd>@Model.OffsetInTicks.ToString() ticks</dd>
+                <dt>Result Reason</dt>
+                <dd>@Model.Reason.ToString()</dd>
+            </dl>
+        </div>
+    }
+</div>

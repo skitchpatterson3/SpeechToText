@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-5">
+        <h2 style="margin-bottom: 30px;">Speech-to-text Demo</h2>
+        <h4>Record live audio <span class="glyphicon glyphicon-comment"></span></h4>
+        <ul>
+            <li>Click the button below to record an audio sample</li>
+            <li>The recording should be a brief utterance (less than 15 seconds)</li>
+            <li>A dedicated microphone or headset may be required.</li>
+        </ul>
+
+        <div>
+            <button style="display: inline-block; " type="button" id="button1">Record Now</button>
+            <div id="countdown" style="display: none; margin-left: 10px;">
+                <span id="timer"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" id="div1"></div>
+
+<script>
+    $(document).ready(function () {
+
+        $("#button1").click(function () {
+            $("#div1").load("/Home/GetShortSampleRecording");
+
+            $("#countdown").css("display", "inline-block");
+            disableRecordButton();
+
+            var timeleft = 5;
+            document.getElementById("timer").innerHTML = "(" + timeleft + (timeleft == 1 ? " second" : " seconds") + " remaining)";
+
+            timeleft -= 1;
+
+            var countdownTimer = setInterval(function () {
+                if (timeleft <= 0) {
+                    clearInterval(countdownTimer);
+                    document.getElementById("timer").innerHTML = "(Ended)";
+                    enableRecordButton();
+                } else {
+                    document.getElementById("timer").innerHTML = "(" + timeleft + (timeleft == 1 ? " second" : " seconds") + " remaining)";
+                }
+                timeleft -= 1;
+            }, 1000);
+        });
+
+        function disableRecordButton() {
+            $("#button1").prop("disabled", true).css("color", "#c0c0c0").text("Recording...");
+            $("#timer").stop(true, true).show();
+        }
+
+        function enableRecordButton() {
+            $("#button1").prop("disabled", false).css("color", "#000").text("Record Now");
+            $("#timer").stop(true, true).delay(1000).fadeOut(1000);
+        }
+
+        function testAlert() {
+            alert("test");
+        }
+    });
+</script>
