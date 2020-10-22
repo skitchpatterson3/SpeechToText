@@ -1,0 +1,197 @@
+{
+	"info": {
+		"_postman_id": "146a16b9-e543-44ef-b809-d1c09dead164",
+		"name": "Azure Speech SDK",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://westus2.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=en-US&format=detailed",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "2efdde4787904073bc0febfdeac28465",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json;text/xml",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "audio/wav; codecs=audio/pcm; samplerate=16000",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/C:/Users/colemanzj/Downloads/male4_inv_16k.wav"
+					}
+				},
+				"url": {
+					"raw": "https://westus2.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=en-US&format=detailed",
+					"protocol": "https",
+					"host": [
+						"westus2",
+						"stt",
+						"speech",
+						"microsoft",
+						"com"
+					],
+					"path": [
+						"speech",
+						"recognition",
+						"conversation",
+						"cognitiveservices",
+						"v1"
+					],
+					"query": [
+						{
+							"key": "language",
+							"value": "en-US"
+						},
+						{
+							"key": "format",
+							"value": "detailed"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET AudioFiles",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:63391/api/audio",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63391",
+					"path": [
+						"api",
+						"audio"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET AudioFile",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:63391/api/audio/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63391",
+					"path": [
+						"api",
+						"audio",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET AudioFile (non-existent file ID)",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:63391/api/audio/1654",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63391",
+					"path": [
+						"api",
+						"audio",
+						"1654"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST New Audio File",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"filename\": \"NewAudio_FromPostman\",\r\n    \"description\": \"New audio file from POST request\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63391/api/audio/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63391",
+					"path": [
+						"api",
+						"audio",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Database",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:63391/api/testdatabase",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63391",
+					"path": [
+						"api",
+						"testdatabase"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
