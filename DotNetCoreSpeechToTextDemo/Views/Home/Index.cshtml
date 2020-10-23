@@ -13,7 +13,7 @@
         </ul>
 
         <div>
-            <button style="display: inline-block; " type="button" id="button1">Record Now</button>
+            <button style="display: inline-block;" type="button" id="button1">Record Now</button>
             <div id="countdown" style="display: none; margin-left: 10px;">
                 <span id="timer"></span>
             </div>
@@ -32,9 +32,12 @@
         </ul>
         <div style="border: 2px solid gray; height: 55px; width: 225px; display: flex; justify-content: center; align-items: center;">
             File upload widget goes here
+            <br />
+            <button style="display: inline-block;" type="button" id="button2">Upload File</button>
         </div>
     </div>
 </div>
+<div class="row" id="div2"></div>
 
 <script>
     $(document).ready(function () {
@@ -60,6 +63,10 @@
                 }
                 timeleft -= 1;
             }, 1000);
+        });
+
+        $("#button2").click(function () {
+            $("#div2").load("/Home/UploadAudioFileForTranscription");
         });
 
         function disableRecordButton() {

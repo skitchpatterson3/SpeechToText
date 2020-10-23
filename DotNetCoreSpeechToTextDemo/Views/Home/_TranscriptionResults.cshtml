@@ -1,0 +1,133 @@
+﻿@model DotNetCoreSpeechToTextDemo.Models.RESTSpeechToTextResult
+
+<div>
+    @if (Model.RecognitionStatus == Microsoft.CognitiveServices.Speech.ResultReason.RecognizedSpeech.ToString())
+    {
+        <div class="bs-callout bs-callout-info">
+            <h4>Speech Transcribed! <span class="glyphicon glyphicon-ok"></span></h4>
+            <dl class="dl-horizontal" style="margin-top: 15px;">
+                <dt>Text Recognized</dt>
+                <dd><em>@Model.NBest.Display</em></dd>
+                <dt style="margin-top: 7px;">Duration</dt>
+                @{
+                    if (Model.Duration.TotalMilliseconds <= 999)
+                    {
+                        <dd style="margin-top: 7px;">
+                            @Model.Duration.TotalMilliseconds.ToString("0.00") ms
+                        </dd>
+                    }
+                    if (Model.Duration.TotalSeconds <= 59)
+                    {
+                        <dd style="margin-top: 7px;">
+                            @Model.Duration.TotalSeconds.ToString("0.00") sec
+                        </dd>
+                    }
+                    if (Model.Duration.TotalMinutes <= 59)
+                    {
+                        <dd style="margin-top: 7px;">
+                            @Model.Duration.TotalMinutes.ToString("0.00") min
+                        </dd>
+                    }
+                    else
+                    {
+                        <dd style="margin-top: 7px;">
+                            @Model.Duration.TotalHours.ToString("0.00") hr
+                        </dd>
+                    }
+                }
+                <dt>Duration (ticks)</dt>
+                <dd>@Model.Duration.Ticks.ToString()</dd>
+                <dt>Audio Offset</dt>
+                <dd>@Model.Offset.ToString() ticks</dd>
+                <dt>Result Reason</dt>
+                <dd>@Model.RecognitionStatus</dd>
+            </dl>
+        </div>
+    }
+    else if (Model.RecognitionStatus == Microsoft.CognitiveServices.Speech.ResultReason.NoMatch.ToString())
+    {
+        <div class="bs-callout bs-callout-danger">
+            <h4>No match. <span class="glyphicon glyphicon-remove"></span></h4>
+            <dl class="dl-horizontal" style="margin-top: 15px;">
+                <dt>Text Recognized</dt>
+                <dd><em>@Model.NBest.Display</em></dd>
+                <dt style="margin-top: 7px;">Duration</dt>
+                @{
+                    if (Model.Duration.TotalMilliseconds <= 999)
+                    {
+                        <dd style="margin-top: 7px;">
+                            @Model.Duration.TotalMilliseconds.ToString("0.00") ms
+                        </dd>
+                    }
+                    if (Model.Duration.TotalSeconds <= 59)
+                    {
+                        <dd style="margin-top: 7px;">
+                            @Model.Duration.TotalSeconds.ToString("0.00") sec
+                        </dd>
+                    }
+                    if (Model.Duration.TotalMinutes <= 59)
+                    {
+                        <dd style="margin-top: 7px;">
+                            @Model.Duration.TotalMinutes.ToString("0.00") min
+                        </dd>
+                    }
+                    else
+                    {
+                        <dd style="margin-top: 7px;">
+                            @Model.Duration.TotalHours.ToString("0.00") hr
+                        </dd>
+                    }
+                }
+                <dt>Duration (ticks)</dt>
+                <dd>@Model.Duration.ToString()</dd>
+                <dt>Audio Offset</dt>
+                <dd>@Model.Offset.ToString() ticks</dd>
+                <dt>Result Reason</dt>
+                <dd>@Model.RecognitionStatus</dd>
+            </dl>
+        </div>
+    }
+    else if (Model.RecognitionStatus == Microsoft.CognitiveServices.Speech.ResultReason.Canceled.ToString())
+    {
+        <div class="bs-callout bs-callout-warning">
+            <h4>Canceled <span class="glyphicon glyphicon-exclamation-sign"></span></h4>
+            <dl class="dl-horizontal" style="margin-top: 15px;">
+                <dt>Text Recognized</dt>
+                <dd><em>@Model.NBest.Display</em></dd>
+                <dt style="margin-top: 7px;">Duration</dt>
+                @{
+                    if (Model.Duration.TotalMilliseconds <= 999)
+                    {
+                        <dd style="margin-top: 7px;">
+                            @Model.Duration.TotalMilliseconds.ToString("0.00") ms
+                        </dd>
+                    }
+                    if (Model.Duration.TotalSeconds <= 59)
+                    {
+                        <dd style="margin-top: 7px;">
+                            @Model.Duration.TotalSeconds.ToString("0.00") sec
+                        </dd>
+                    }
+                    if (Model.Duration.TotalMinutes <= 59)
+                    {
+                        <dd style="margin-top: 7px;">
+                            @Model.Duration.TotalMinutes.ToString("0.00") min
+                        </dd>
+                    }
+                    else
+                    {
+                        <dd style="margin-top: 7px;">
+                            @Model.Duration.TotalHours.ToString("0.00") hr
+                        </dd>
+                    }
+                }
+                <dt>Duration (ticks)</dt>
+                <dd>@Model.Duration.ToString()</dd>
+                <dt>Audio Offset</dt>
+                <dd>@Model.Offset.ToString() ticks</dd>
+                <dt>Result Reason</dt>
+                <dd>@Model.RecognitionStatus</dd>
+            </dl>
+        </div>
+    }
+</div>

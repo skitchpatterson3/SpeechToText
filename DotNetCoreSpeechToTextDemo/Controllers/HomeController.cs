@@ -6,15 +6,23 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DotNetCoreSpeechToTextDemo.Models;
 using Microsoft.CognitiveServices.Speech;
+using Microsoft.Extensions.Configuration;
 
 namespace DotNetCoreSpeechToTextDemo.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IConfiguration _configuration;
+
+        public HomeController(IConfiguration configuration)
+        {
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+        }
+
         [HttpGet]
         public async Task<ActionResult> GetShortSampleRecording()
         {
-            var config = SpeechConfig.FromSubscription("2efdde4787904073bc0febfdeac28465", "westus2");
+            var config = SpeechConfig.FromSubscription(_configuration["cognitiveServiceApi:subscriptionKey"], _configuration["cognitiveServiceApi:region"]);
 
             // If you get a error stating "Unable to load DLL 'Microsoft.CognitiveServices.Speech.core.dll'" it may be due to
             // the machine not having the latest "Microsoft Visual C++ Redistributable for Visual Studio 2015, 2017 and 2019"
@@ -28,7 +36,6 @@ namespace DotNetCoreSpeechToTextDemo.Controllers
 
             using (var recognizer = new SpeechRecognizer(config))
             {
-
                 var result = await recognizer.RecognizeOnceAsync();
 
                 r.Reason = result.Reason;
@@ -58,6 +65,42 @@ namespace DotNetCoreSpeechToTextDemo.Controllers
                 
                 return PartialView("_ShortSampleRecording", r);
             }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> UploadAudioFileForTranscription()
+        {
+            var config = SpeechConfig.FromSubscription(_configuration["cognitiveServiceApi:subscriptionKey"], _configuration["cognitiveServiceApi:region"]);
+
+            RESTSpeechToTextResult r = new RESTSpeechToTextResult
+            {
+                RecognitionStatus = "RecognizedSpeech",
+                Offset = 1234567890,
+                Duration = new TimeSpan(4040800000),
+                NBest = new NBest
+                {
+                    Confidence = .99,
+                    Lexical = "this is a typed out example",
+                    Itn = "this is a typed out example",
+                    MaskedItn = "this is a typed out example",
+                    Display = "This is a typed-out example."
+                }
+            };
+
+            //{
+            //    using (var recognizer = new SpeechRecognizer(config))
+            //    {
+            //        var result = await recognizer.RecognizeOnceAsync();
+
+            //        r.RecognitionStatus = result.Reason.ToString();
+            //        r.Duration = result.Duration;
+            //        r.Offset = result.OffsetInTicks;
+
+            //        return PartialView("_TranscriptionResults", r);
+            //    }
+            //}
+
+            return PartialView("_TranscriptionResults", r);
         }
 
         public IActionResult Index()
@@ -95,7 +138,7 @@ namespace DotNetCoreSpeechToTextDemo.Controllers
 
         //public static async Task RecognizeSpeechAsync()
         //{
-        //    var config = SpeechConfig.FromSubscription("2efdde4787904073bc0febfdeac28465", "westus2");
+        //    var config = SpeechConfig.FromSubscription("subscriptionKey", "region");
 
         //    using (var recognizer = new SpeechRecognizer(config))
         //    {
